@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="screen-orientation" content="portrait">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0"/>
+    <title>年会抽奖小程序</title>
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/wall.css">
+    <link href="fonts/ysbth.ttf" rel="stylesheet">
+    <style type="text/css">
+        body, html {
+            width: 100%;
+            height: 100%;
+        }
+        .tip {
+          color: #fff;
+        }
+        #goBtn {
+          color: blue;
+        }
+        .result {
+            position: absolute;
+            height: 370px;
+            width: 880px;
+            left: 0; 
+            top: 50%;
+            left: 50%;
+            margin-top: -185px;
+            margin-left: -440px;
+            text-align: center;
+            padding: 10px;
+            display: none;
+        }
+        .result-tit {
+          font-size: 50px;
+          margin-bottom: 50px;
+          color: #ffffff;
+        }
+        .result span {
+            display: inline-block;
+            font-size: 40px;
+            width: 150px;
+            /* background: #fff; */
+            line-height: 30px;
+            color: #ffffff;
+            margin: 30px;
+            border-radius: 10px;
+            /* box-shadow: 0 5px 10px rgba(0, 0, 0, 0.8); */
+            padding: 10px 0;
+        }
+        .result span.w2or3 {
+          width: 233px;
+          font-size: 40px;
+        }
+        .result span.f50 {
+            font-size: 50px;
+            width: 220px;
+        }
+        .result span.f70 {
+            font-size: 100px;
+            width: 400px;
+        }
+        button, input, optgroup, select, textarea {
+            color: inherit;
+            font: inherit;
+            margin: 0;
+            border: none;
+        }
+        button {
+            overflow: visible;
+        }
+        button, select {
+            text-transform: none;
+        }
+        button, html input[type=button], input[type=reset], input[type=submit] {
+            -webkit-appearance: button;
+            cursor: pointer;
+        }
+        .pure-button {
+            display: inline-block;
+            zoom: 1;
+            line-height: normal;
+            white-space: nowrap;
+            vertical-align: middle;
+            text-align: center;
+            cursor: pointer;
+            -webkit-user-drag: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        .pure-button {
+            font-family: inherit;
+            font-size: 100%;
+            padding: .5em 1em;
+            color: #444;
+            color: rgba(0,0,0,.8);
+            border: 0 rgba(0,0,0,0);
+            background-color: #E6E6E6;
+            text-decoration: none;
+            border-radius: 2px;
+        }
+        .pure-button:focus {
+            outline: 0
+        }
+        .pure-button-hover, .pure-button:hover, .pure-button:focus {
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#1a000000', GradientType=0);
+            background-image: -webkit-gradient(linear,0 0,0 100%,from(transparent),color-stop(40%,rgba(0,0,0,.05)),to(rgba(0,0,0,.1)));
+            background-image: -webkit-linear-gradient(transparent,rgba(0,0,0,.05) 40%,rgba(0,0,0,.1));
+            background-image: -moz-linear-gradient(top,rgba(0,0,0,.05) 0,rgba(0,0,0,.1));
+            background-image: -o-linear-gradient(transparent,rgba(0,0,0,.05) 40%,rgba(0,0,0,.1));
+            background-image: linear-gradient(transparent,rgba(0,0,0,.05) 40%,rgba(0,0,0,.1));
+        }
+
+        .button-success, .button-error, .button-warning, .button-secondary {
+            color: white;
+            border-radius: 4px;
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+        }
+        .button-success {
+            background: rgb(28, 184, 65);
+        }
+        .button-error {
+            background: rgb(202, 60, 60);
+        }
+        .button-warning {
+            background: rgb(223, 117, 20);
+        }
+        .button-secondary {
+            background: rgb(66, 184, 221);
+        }
+        .tools {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            text-align: center;
+        }
+        .tools .pure-button {
+            display: inline-block;
+            margin: 5px;
+            padding: 10px 0;
+            text-align: center;
+            width:50px;
+        }
+        .mask {
+            -webkit-filter:blur(20px);
+            filter:blur(20px);
+        }
+        #main {
+            -webkit-transition: all 1s;
+            transition: all 1s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .logo {
+          width: 100%;
+          height: 150px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          position: absolute;
+          top: 40px;
+          left: 0;
+          border: 1px solid red;
+        }
+        .result-btn {
+          width: 100%;
+            /* margin-top: 20px; */
+            text-align: right;
+            margin-right: 30px;
+            text-decoration: none;
+            color: white;
+            position: absolute;
+            top: 20px;
+            right: 30px;
+        }
+    </style>
+</head>
+<body>
+<div id="main" class="wall">
+    <!-- <div class="result-btn">
+       <p id="goBtn">获奖名单</p>
+    </div> -->
+</div>
+<!-- logo -->
+<!-- <div class="logo">LOGO</div> -->
+<!-- 结果展示 -->
+<div id="result" class="result">
+  <div class="result-tit"></div>
+  <div id="result-box"></div>
+</div>
+<div id="tools" class="tools">
+  <p class="tip" v-if="selectLevel == 0">当前抽奖类型：特等奖</p>
+  <p class="tip" v-if="selectLevel == 1">当前抽奖类型：一等奖</p>
+  <p class="tip" v-if="selectLevel == 2">当前抽奖类型：二等奖</p>
+  <p class="tip" v-if="selectLevel == 3">当前抽奖类型：三等奖</p>
+  <p class="tip" v-if="selectLevel == 4">当前抽奖类型：四等奖</p>
+  <p class="tip" v-if="selectLevel == 5">当前抽奖类型：五等奖</p>
+  <p class="tip" v-if="selectLevel == 6">当前抽奖类型：终极大奖</p>
+  <!-- 按钮注释 -->
+  <!-- <button
+    v-for="value in btns"
+    @click="onClick(value)"
+    class="pure-button"
+    :class="{ 'button-error': selectLevel == value.type}"
+    >{{value.name}}
+  </button>
+  <button
+    class="pure-button"
+    @click="toggle"
+    :class="{'button-secondary': !running,
+            'button-success': running}">{{running?'停!':'开始'}}
+  </button>
+  <button class="pure-button button-warning" @click="reset">重置</button> -->
+</div>
+<script type="text/javascript" src="js/zepto.js"></script>
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript" src="js/tagcanvas.js"></script>
+<script type="text/javascript" src="js/member.js"></script>
+<!-- <script type="text/javascript" src="js/all.js"></script> -->
+<script type="text/javascript">
+  if (window.FontFace) {
+      var fontFile = new FontFace('wjjw', 'url(./fonts/ysbth.ttf)');
+
+      fontFile.load().then( () => {
+          console.log('成功');
+          (function(){
+              var _this
+              var selectLevel = 5
+              var titName = '五等奖'
+              var member = memberAll; // .concat((blessing))
+              var choosed = JSON.parse(localStorage.getItem('choosed')) || {};
+              var choosedZjdj = JSON.parse(localStorage.getItem('choosedZjdj')) || {};
+              console.log('已经获奖的人数1', choosed, choosedZjdj);
+              var speed = function(){
+                  return [0.1 * Math.random() + 0.01, -(0.1 * Math.random() + 0.01)];
+              };
+              var getKey = function(item){
+                  return item.name + '-' + item.phone;
+              };
+              var createHTML = function(){
+                  console.log('执行这里了', member)
+                  var html = [ '<ul>' ];
+                  member.forEach(function(item, index){
+                      item.index = index;
+                      var key = getKey(item);
+                      var color = choosed[key] ? 'yellow' : 'white';
+                      html.push(`<li><a href="#" style="color: white;"> ${item.name} </a></li>`);
+                  });
+                  html.push('</ul>');
+                  return html.join('');
+              };
+              $('#goBtn').click(function() {
+                window.location.href = './result.html';
+              })
+              var lottery = function(count){
+                  var list = canvas.getElementsByTagName('a');
+                  var color = 'yellow';
+                  console.log('过滤的逻辑', selectLevel)
+                  if(!this.running){ // 点击开始按钮的时候过滤
+                    if (selectLevel === 0 || selectLevel === 1) {
+                      console.log('zouzhelile', member.length, memberAll.length)
+                      // 1等奖或者特等奖  过滤掉指定的人员
+                      member = memberAll.filter(function(item) {  
+                        return !filterArr.find(item1 => {
+                          return item1.phone == item.phone
+                        });  
+                      })
+                      // .filter(function(item) {  
+                      //   return !blessing.find(item1 => {
+                      //     return item1.phone == item.phone
+                      //   });  
+                      // });  
+                      console.log('1等奖的所有抽奖名单：', member)
+                    } else {
+                      // 默认全部的数据
+                      member = memberAll
+                      // .filter(function(item) {  
+                      //   return !blessing.find(item1 => {
+                      //     return item1.phone == item.phone
+                      //   });  
+                      // })
+                      console.log('默认的所有抽奖名单：', member)
+                    }
+                  }
+                  if (selectLevel === 6) {
+                    var allPersons = member.filter(function(m, index){
+                      m.index = index;
+                      return !choosedZjdj[getKey(m)];
+                    })
+                    console.log('终极大奖的参与人数：', allPersons)
+                  } else {
+                    // 特等奖到5等奖 抽奖之前要 过滤掉 已近中了的人
+                    var allPersons = member.filter(function(m, index){
+                      m.index = index;
+                      return !choosed[getKey(m)];
+                    })
+                    console.log('当前奖项的参与人数：', allPersons)
+                  }
+                  var ret = allPersons
+                      // .filter(function(m, index){
+                      //     m.index = index;
+                      //     return !choosed[getKey(m)];
+                      // })
+                      .map(function(m){
+                          return Object.assign({
+                            score: Math.random()
+                          }, m);
+                      })
+                      .sort(function(a, b){
+                          return a.score - b.score;
+                      })
+                      .slice(0, count)
+                      .map(function(m){
+                        console.log('101:', choosed, getKey(m))
+                        if (selectLevel === 6) {
+                          choosedZjdj[getKey(m)] = 1;
+                        } else {
+                          choosed[getKey(m)] = 1;
+                        }
+                        list[m.index].style.color = 'white' // color;
+                        return m.name // + '<br/>' + m.phone; 
+                      });
+                  if (selectLevel === 6) {
+                    localStorage.setItem('choosedZjdj', JSON.stringify(choosedZjdj));
+                  } else {
+                    localStorage.setItem('choosed', JSON.stringify(choosed));
+                  }
+                  
+                  return ret;
+              };
+              var canvas = document.createElement('canvas');
+              canvas.id = 'myCanvas';
+              canvas.width = document.body.offsetWidth;
+              canvas.height = document.body.offsetHeight - 300;
+              document.getElementById('main').appendChild(canvas);
+              new Vue({
+                  el: '#tools',
+                  data: {
+                      selected: 10,
+                      selectLevel: 5,
+                      selectName: '五等奖',
+                      running: false,
+                      // btns: [
+                      //     30, 10, 5, 2, 1
+                      // ],
+                      btns: [{
+                        type: 0,
+                        num: 1,
+                        name: '特等奖'
+                      },{
+                        type: 1,
+                        num: 1,
+                        name: '一等奖'
+                      },{
+                        type: 2,
+                        num: 5,
+                        name: '二等奖'
+                      },{
+                        type: 3,
+                        num: 5,
+                        name: '三等奖'
+                      },{
+                        type: 4,
+                        num: 8,
+                        name: '四等奖'
+                      },{
+                        type: 5,
+                        num: 10,
+                        name: '五等奖'
+                      },{
+                        type: 6,
+                        num: 1,
+                        name: '终极大奖'
+                      }]
+                  },
+                  watch: {
+                    // selectLevel(n) {
+                    //   this.selectName = this.btns.filter(item => {
+                    //     return item.type === n
+                    //   })[0].name
+                    // }
+                  },
+                  mounted () {
+                      _this = this
+                      canvas.innerHTML = createHTML();
+                      // 具体参数文档：
+                      // https://blog.csdn.net/weixin_44397273/article/details/109613273
+                      TagCanvas.Start('myCanvas', '', {
+                          textColour: null,
+                          initial: speed(),
+                          dragControl: 1,
+                          textHeight: 18,
+                          textFont: 'wjjw',
+                          // outlineOffset: 50
+                          // fadeIn:3000,
+                          // shape:'Sphere' // Sphere hcylinder vcylinder
+                          // depth: 1
+                          maxSpeed: 0.5, // 旋转的速度
+                      });
+                      // 键盘控制的逻辑
+                      document.addEventListener("keydown",e => {
+                        console.info("keydown", e.keyCode);
+                        if (e.keyCode === 48) {
+                          console.log('特等奖')
+                          let item = this.btns.filter(item => item.type === 0)[0]
+                          _this.onClick(item)
+                        } else if (e.keyCode === 49) {
+                          console.log('一等奖')
+                          let item = this.btns.filter(item => item.type === 1)[0]
+                          _this.onClick(item)
+                        } else if(e.keyCode === 50) {
+                          console.log('二等奖')
+                          let item = this.btns.filter(item => item.type === 2)[0]
+                          _this.onClick(item)
+                        } else if(e.keyCode === 51) {
+                          console.log('三等奖')
+                          let item = this.btns.filter(item => item.type === 3)[0]
+                          _this.onClick(item)
+                        } else if(e.keyCode === 52) {
+                          console.log('四等奖')
+                          let item = this.btns.filter(item => item.type === 4)[0]
+                          _this.onClick(item)
+                        } else if(e.keyCode === 54) {
+                          console.log('五等奖')
+                          let item = this.btns.filter(item => item.type === 5)[0]
+                          _this.onClick(item)
+                        } else if(e.keyCode === 55) {
+                          console.log('终极大奖')
+                          let item = this.btns.filter(item => item.type === 6)[0]
+                          _this.onClick(item)
+                        }
+                        // 点击回车 控制开始、结束 按钮
+                        if (e.keyCode === 13){
+                          _this.toggle()
+                        }
+                        // 控制抽奖的类型 -- 点击 tab 键
+                        if (e.keyCode === 9) {
+                          switch (_this.selectLevel) {
+                            case 0:
+                              _this.selectLevel = 6
+                              selectLevel = 6
+                              break;
+                            case 1:
+                              _this.selectLevel = 0
+                              selectLevel = 0
+                              break;
+                            case 2:
+                              _this.selectLevel = 1
+                              selectLevel = 1
+                              break;
+                            case 3:
+                              _this.selectLevel = 2
+                              selectLevel = 2
+                              break;
+                            case 4:
+                              _this.selectLevel = 3
+                              selectLevel = 3
+                              break;
+                            case 5:
+                              _this.selectLevel = 4
+                              selectLevel = 4
+                              break;
+                            case 6:
+                              _this.selectLevel = 5
+                              selectLevel = 5
+                              break;
+                            default:
+                          }
+                          let item = this.btns.filter(item => item.type === _this.selectLevel)[0]
+                          _this.onClick(item)
+                        }
+                        // 点击 r 键  关闭 获奖名单 弹窗
+                        if (e.keyCode === 82) {
+                          $('#result').css('display', 'none');
+                          $('#main').removeClass('mask');
+                        }
+                        // 点击 d 键盘  清除本地缓存（临时用）
+                        if (e.keyCode === 68) {
+                          _this.reset()
+                        }
+                      })
+                  },
+                  methods: {
+                      reset: function(){
+                          if(confirm('确定要重置么？所有之前的抽奖历史将被清除！')){
+                              localStorage.clear();
+                              location.reload(true);
+                          }
+                      },
+                      onClick: function(item){
+                          console.log('当前点击的：', item.type, item.num);
+                          $('#result').css('display', 'none');
+                          $('#main').removeClass('mask');
+                          this.selected = item.num;
+                          selectLevel = item.type;
+                          this.selectLevel = item.type;
+                      },
+                      toggle: function(){
+                          console.log('开始抽奖-running', this.running)
+                          console.log('开始抽奖-selected', this.selected)
+                          
+                          if(this.running){
+                              TagCanvas.SetSpeed('myCanvas', speed());
+                              var ret = lottery(this.selected);
+                              if (ret.length === 0) {
+                                  $('#result').css('display', 'block').html('<span>已抽完</span>');
+                                  return
+                              }
+                              $('#result').css('display', 'block')
+                              console.log('奖项', selectLevel)
+                              switch (selectLevel) {
+                                case 0:
+                                  titName ='特等奖'
+                                break;
+                                case 1:
+                                  titName ='一等奖'
+                                break;
+                                case 2:
+                                  titName ='二等奖'
+                                break;
+                                case 3:
+                                  titName ='三等奖'
+                                break;
+                                case 4:
+                                  titName ='四等奖'
+                                break;
+                                case 5:
+                                  titName ='五等奖'
+                                break;
+                                case 6:
+                                  titName ='终极大奖'
+                                break;
+                              }
+                              if (selectLevel === 6) {
+                                // 终极大奖，隐藏标题
+                                $('#result .result-tit').css("display", 'none')
+                              }
+                              $('#result .result-tit').html(titName)
+                              if (selectLevel === 0 || selectLevel === 1) {
+                                // 特等奖和一等奖 名字大一点
+                                $('#result #result-box').html('<span class="f50">' + ret.join('</span><span>') + '</span>');
+                              } else if (selectLevel === 6) {
+                                // 终极大奖
+                                $('#result #result-box').html('<span class="f70">' + ret.join('</span><span>') + '</span>');
+                              } else if (selectLevel === 2 || selectLevel === 3) {
+                                // 二等奖或者三等奖
+                                $('#result #result-box').html('<span class="w2or3">' + ret.join('</span><span>') + '</span>');
+                              } else {
+                                $('#result #result-box').html('<span>' + ret.join('</span><span>') + '</span>');
+                              }
+                              TagCanvas.Reload('myCanvas');
+                              setTimeout(function(){
+                                  localStorage.setItem(new Date().toString(), JSON.stringify(ret));
+                                  $('#main').addClass('mask');
+                              }, 300);
+                          } else {
+                              $('#result').css('display', 'none');
+                              $('#main').removeClass('mask');
+                              TagCanvas.SetSpeed('myCanvas', [5, 1]);
+                          }
+                          this.running = !this.running;
+                      }
+                  }
+              });
+          })();
+      }, function (err) {
+          console.log('失败：' + err);
+      });
+  }
+</script>
+</body>
+</html>
