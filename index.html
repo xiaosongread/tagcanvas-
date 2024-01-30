@@ -54,12 +54,12 @@
           font-size: 40px;
         }
         .result span.f50 {
-            font-size: 50px;
-            width: 220px;
+            font-size: 120px;
+            width: 500px;
         }
         .result span.f70 {
-            font-size: 100px;
-            width: 400px;
+            font-size: 120px;
+            width: 500px;
         }
         button, input, optgroup, select, textarea {
             color: inherit;
@@ -265,7 +265,7 @@
                   var color = 'yellow';
                   console.log('过滤的逻辑', selectLevel)
                   if(!this.running){ // 点击开始按钮的时候过滤
-                    if (selectLevel === 0 || selectLevel === 1) {
+                    if (selectLevel === 0 || selectLevel === 1 || selectLevel === 2 || selectLevel === 6) {
                       console.log('zouzhelile', member.length, memberAll.length)
                       // 1等奖或者特等奖  过滤掉指定的人员
                       member = memberAll.filter(function(item) {  
@@ -405,7 +405,7 @@
                           // fadeIn:3000,
                           // shape:'Sphere' // Sphere hcylinder vcylinder
                           // depth: 1
-                          maxSpeed: 0.5, // 旋转的速度
+                          maxSpeed: 0.4, // 旋转的速度
                       });
                       // 键盘控制的逻辑
                       document.addEventListener("keydown",e => {
