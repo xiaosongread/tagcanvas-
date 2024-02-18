@@ -841,11 +841,6 @@ var memberAll = [
       "department": "项目管理中心"
   },
   {
-      "phone": "No.169",
-      "name": "刘丹",
-      "department": "项目管理中心"
-  },
-  {
       "phone": "No.170",
       "name": "王柯彬",
       "department": "项目管理中心"
@@ -1061,41 +1056,6 @@ var memberAll = [
       "department": ""
   },
   {
-      "phone": "No.214",
-      "name": "陈刚",
-      "department": ""
-  },
-  {
-      "phone": "No.215",
-      "name": "阿kenn",
-      "department": ""
-  },
-  {
-      "phone": "No.216",
-      "name": "彬子",
-      "department": ""
-  },
-  {
-      "phone": "No.217",
-      "name": "tina",
-      "department": ""
-  },
-  {
-      "phone": "No.218",
-      "name": "郑梦秋",
-      "department": ""
-  },
-  {
-      "phone": "No.219",
-      "name": "林燕燕",
-      "department": ""
-  },
-  {
-      "phone": "No.220",
-      "name": "刘亨博",
-      "department": ""
-  },
-  {
       "phone": "No.221",
       "name": "田鸿杰",
       "department": ""
@@ -1262,41 +1222,6 @@ var filterArr = [
   {
       "phone": "No.213",
       "name": "陈俊旭",
-      "department": ""
-  },
-  {
-      "phone": "No.214",
-      "name": "陈刚",
-      "department": ""
-  },
-  {
-      "phone": "No.215",
-      "name": "阿kenn",
-      "department": ""
-  },
-  {
-      "phone": "No.216",
-      "name": "彬子",
-      "department": ""
-  },
-  {
-      "phone": "No.217",
-      "name": "tina",
-      "department": ""
-  },
-  {
-      "phone": "No.218",
-      "name": "郑梦秋",
-      "department": ""
-  },
-  {
-      "phone": "No.219",
-      "name": "林燕燕",
-      "department": ""
-  },
-  {
-      "phone": "No.220",
-      "name": "刘亨博",
       "department": ""
   },
   {

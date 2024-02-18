@@ -400,13 +400,7 @@
                           initial: speed(),
                           dragControl: 1,
                           textHeight: 18,
-                          // textFont: 'wjjw',
-                          // bgColour: 'red',
-                          // bgOutline: 'yellow',
-                          // outlineColour: '#fff',
-                          // outlineThickness:2,//轮廓的粗细(以像素为单位)
-                          // outlineOffset:5,//轮廓与文本的距离,以像素为单位
-                          // bgRadius:5,//背景圆角的半径(以像素为单位)。
+                          textFont: 'wjjw',
                           // outlineOffset: 50
                           // fadeIn:3000,
                           // shape:'Sphere' // Sphere hcylinder vcylinder
@@ -555,8 +549,10 @@
                               if (selectLevel === 6) {
                                 // 终极大奖，隐藏标题
                                 $('#result .result-tit').css("display", 'none')
+                              } else {
+                                $('#result .result-tit').css("display", 'block')
+                                $('#result .result-tit').html(titName)
                               }
-                              $('#result .result-tit').html(titName)
                               if (selectLevel === 0 || selectLevel === 1) {
                                 // 特等奖和一等奖 名字大一点
                                 $('#result #result-box').html('<span class="f50">' + ret.join('</span><span>') + '</span>');
